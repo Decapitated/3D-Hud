@@ -55,6 +55,7 @@ mesh = SubResource("QuadMesh_5ujtm")
 shape = SubResource("ConcavePolygonShape3D_n4mta")
 
 [node name="SubViewport" type="SubViewport" parent="Hud3D"]
+transparent_bg = true
 size = Vector2i(889, 500)
 
 [node name="TestUI" parent="Hud3D/SubViewport" instance=ExtResource("2_glhle")]

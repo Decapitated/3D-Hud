@@ -61,11 +61,10 @@ text = "Button
 "
 
 [node name="TextEdit" type="TextEdit" parent="PanelContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(250, 35)
 layout_mode = 2
 placeholder_text = "Input text here...
 "
-scroll_fit_content_height = true
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
