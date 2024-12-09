@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded;
+render_mode unshaded, cull_disabled; // Unshaded, Double sided. Feel free to remove either.
 
 uniform sampler2D ui_texture: source_color;
 
