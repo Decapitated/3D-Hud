@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://ebxh0uc0j3hc"]
+[gd_scene load_steps=12 format=3 uid="uid://ebxh0uc0j3hc"]
 
 [ext_resource type="Script" path="res://camera_pivot.gd" id="1_0gi6u"]
 [ext_resource type="Script" path="res://hud_3d.gd" id="1_1r184"]
 [ext_resource type="Shader" path="res://ui_texture.gdshader" id="2_5kxsp"]
 [ext_resource type="PackedScene" uid="uid://clcgnsdadvfov" path="res://test_ui.tscn" id="2_glhle"]
 [ext_resource type="Texture2D" uid="uid://ckfrhcruh8ajs" path="res://icon.svg" id="5_m8sjb"]
+[ext_resource type="Environment" uid="uid://dri42eokspdkp" path="res://base_enviroment.tres" id="6_2w27q"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_il1y5"]
 viewport_path = NodePath("Hud3D/SubViewport")
@@ -26,11 +27,19 @@ size = Vector2(100, 100)
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Enviroment" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviroment"]
+transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviroment"]
+environment = ExtResource("6_2w27q")
+
+[node name="CameraHolder" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
 script = ExtResource("1_0gi6u")
 
-[node name="Camera3D" type="Camera3D" parent="Node3D"]
+[node name="Camera3D" type="Camera3D" parent="CameraHolder"]
 
 [node name="Hud3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -50,22 +59,19 @@ size = Vector2i(889, 500)
 
 [node name="TestUI" parent="Hud3D/SubViewport" instance=ExtResource("2_glhle")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Ground" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_5msht")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 0, 0)
+[node name="Reticle" type="CanvasLayer" parent="."]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+[node name="CenterContainer" type="CenterContainer" parent="Reticle"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer"]
+[node name="TextureRect" type="TextureRect" parent="Reticle/CenterContainer"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 texture = ExtResource("5_m8sjb")
