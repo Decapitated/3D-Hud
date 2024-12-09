@@ -26,7 +26,7 @@ func _unhandled_input(event):
             event.position = current_mouse_position
             subviewport.push_input(event)
         # Send key events to hud viewport
-        elif event is InputEventKey && is_mouse_on:
+        elif event is InputEventKey:
             subviewport.push_input(event)
 
 func _process(_delta):
