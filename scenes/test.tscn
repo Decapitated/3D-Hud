@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://ebxh0uc0j3hc"]
 
-[ext_resource type="Script" path="res://camera_pivot.gd" id="1_0gi6u"]
-[ext_resource type="Script" path="res://hud_3d.gd" id="1_1r184"]
+[ext_resource type="Script" path="res://scripts/camera_pivot.gd" id="1_0gi6u"]
+[ext_resource type="Script" path="res://scripts/hud_3d.gd" id="1_1r184"]
 [ext_resource type="Shader" path="res://ui_texture.gdshader" id="2_5kxsp"]
-[ext_resource type="PackedScene" uid="uid://clcgnsdadvfov" path="res://test_ui.tscn" id="2_glhle"]
+[ext_resource type="PackedScene" uid="uid://clcgnsdadvfov" path="res://scenes/test_ui.tscn" id="2_glhle"]
 [ext_resource type="Texture2D" uid="uid://ckfrhcruh8ajs" path="res://icon.svg" id="5_m8sjb"]
 [ext_resource type="Environment" uid="uid://dri42eokspdkp" path="res://base_enviroment.tres" id="6_2w27q"]
 
