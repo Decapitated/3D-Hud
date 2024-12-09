@@ -20,25 +20,29 @@ func _input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3,
         subviewport.push_input(event)
 
 func _unhandled_input(event):
-    if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and is_mouse_on:
+    if is_mouse_on:
         # Send mouse clicks to hud viewport.
-        if event is InputEventMouseButton:
+        if event is InputEventMouseButton && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
             event.position = current_mouse_position
+            subviewport.push_input(event)
+        # Send key events to hud viewport
+        elif event is InputEventKey && is_mouse_on:
             subviewport.push_input(event)
 
 func _process(_delta):
-    if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-        var ray = get_camera_ray(5)
-        var result = raycast(ray.origin, ray.end)
-        if !result.is_empty() && result.collider == self:
-            is_mouse_on = true
+    var ray = get_camera_ray(5)
+    var result = raycast(ray.origin, ray.end)
+    if !result.is_empty() && result.collider == self:
+        is_mouse_on = true
+        var mouse_position = world_to_viewport(result.position)
+        current_mouse_position = mouse_position
+        # Only send event if mouse is captured.
+        if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
             var event = InputEventMouseMotion.new()
-            var mouse_position = world_to_viewport(result.position)
-            current_mouse_position = mouse_position
             event.position = mouse_position
             subviewport.push_input(event)
-        else:
-            is_mouse_on = false
+    else:
+        is_mouse_on = false
 
 func world_to_viewport(world_position: Vector3) -> Vector2:
     var local_position := to_local(world_position)
