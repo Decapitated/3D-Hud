@@ -2,8 +2,10 @@ extends Node3D
 
 @onready var camera: Camera3D = $Camera3D
 
-func _ready():
-    Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+var is_escaped := false
+
+func _process(_delta):
+    Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if is_escaped else Input.MOUSE_MODE_VISIBLE
 
 func _unhandled_input(event):
     if event is InputEventMouseMotion:
@@ -12,7 +14,4 @@ func _unhandled_input(event):
             camera.rotate_x(-event.relative.y * 0.001)
     elif event is InputEventKey:
         if event.pressed and event.keycode == KEY_ESCAPE:
-            if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-                Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-            else:
-                Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+            is_escaped = !is_escaped
