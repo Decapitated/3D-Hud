@@ -22,7 +22,7 @@ func _input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3,
 func _unhandled_input(event):
     if is_mouse_on:
         # Send mouse clicks to hud viewport.
-        if event is InputEventMouseButton && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+        if event is InputEventMouse && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
             event.position = current_mouse_position
             subviewport.push_input(event)
         # Send key events to hud viewport
@@ -36,11 +36,6 @@ func _process(_delta):
         is_mouse_on = true
         var mouse_position = world_to_viewport(result.position)
         current_mouse_position = mouse_position
-        # Only send event if mouse is captured.
-        if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-            var event = InputEventMouseMotion.new()
-            event.position = mouse_position
-            subviewport.push_input(event)
     else:
         is_mouse_on = false
 
